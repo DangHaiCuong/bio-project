@@ -1,13 +1,22 @@
 // Scene setup
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    powerPreference: "high-performance"
+});
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
 document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-camera.position.z = 50;
+camera.position.set(0, 0, 60);
 
 // Particle system
 const particleCount = 1500;
@@ -263,41 +272,59 @@ function createCuteBearModel() {
 // Add multiple 3D bears to the scene
 const bears3D = [];
 const bearPositions = [
-    { x: -20, y: 10, z: -20 },
-    { x: 25, y: -15, z: -15 },
-    { x: -15, y: -10, z: -25 },
-    { x: 20, y: 15, z: -30 }
+    { x: -35, y: 15, z: 10 },
+    { x: 40, y: -10, z: 5 },
+    { x: -30, y: -15, z: 15 },
+    { x: 35, y: 20, z: 8 },
+    { x: 0, y: -25, z: 12 }
 ];
 
 bearPositions.forEach((pos, index) => {
     const bear = createCuteBearModel();
     bear.position.set(pos.x, pos.y, pos.z);
-    bear.scale.set(0.8, 0.8, 0.8);
+    const scale = 1.2 + Math.random() * 0.3;
+    bear.scale.set(scale, scale, scale);
+    bear.castShadow = true;
+    bear.receiveShadow = true;
     scene.add(bear);
     bears3D.push({
         mesh: bear,
         baseY: pos.y,
-        baseRotationY: 0,
-        speed: 0.5 + Math.random() * 0.5,
-        rotationSpeed: 0.005 + Math.random() * 0.01,
+        baseRotationY: Math.random() * Math.PI * 2,
+        speed: 0.3 + Math.random() * 0.4,
+        rotationSpeed: 0.003 + Math.random() * 0.007,
         wavePhase: Math.random() * Math.PI * 2,
         bouncePhase: Math.random() * Math.PI * 2,
         isHovered: false,
-        clickTime: 0
+        clickTime: 0,
+        baseScale: scale
     });
 });
 
 // Add lights for 3D bears
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+const ambientLight = new THREE.AmbientLight(0xfff5f5, 0.8);
 scene.add(ambientLight);
 
-const pointLight1 = new THREE.PointLight(0xff69b4, 1, 100);
-pointLight1.position.set(10, 10, 10);
+const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+mainLight.position.set(20, 30, 40);
+mainLight.castShadow = true;
+mainLight.shadow.mapSize.width = 2048;
+mainLight.shadow.mapSize.height = 2048;
+scene.add(mainLight);
+
+const pointLight1 = new THREE.PointLight(0xff69b4, 2, 150);
+pointLight1.position.set(10, 10, 20);
+pointLight1.castShadow = true;
 scene.add(pointLight1);
 
-const pointLight2 = new THREE.PointLight(0xffc0cb, 0.8, 100);
-pointLight2.position.set(-10, -10, 10);
+const pointLight2 = new THREE.PointLight(0xffc0cb, 1.5, 150);
+pointLight2.position.set(-10, -10, 20);
+pointLight2.castShadow = true;
 scene.add(pointLight2);
+
+const pointLight3 = new THREE.PointLight(0xff1493, 1, 100);
+pointLight3.position.set(0, 0, 30);
+scene.add(pointLight3);
 
 // Mouse interaction
 const mouse = new THREE.Vector2();
@@ -471,7 +498,7 @@ function animate() {
             bearObj.mesh.rotation.y = bearObj.baseRotationY;
 
             // Scale up when hovered
-            const hoverScale = 0.9;
+            const hoverScale = bearObj.baseScale * 1.15;
             bearObj.mesh.scale.set(hoverScale, hoverScale, hoverScale);
 
             // Wiggle ears
@@ -492,7 +519,7 @@ function animate() {
             bearObj.mesh.rotation.x = Math.sin(time * bearObj.speed * 0.5) * 0.1;
 
             // Normal scale with pulse
-            const scale = 0.8 + Math.sin(time * bearObj.speed * 2) * 0.05;
+            const scale = bearObj.baseScale + Math.sin(time * bearObj.speed * 2) * 0.08;
             bearObj.mesh.scale.set(scale, scale, scale);
 
             // Gentle ear movement
