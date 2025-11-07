@@ -478,7 +478,6 @@ body {
     
     /* TEXT STROKE - Viền chữ nổi bật */
     -webkit-text-stroke: 2px rgba(255, 255, 255, 0.3);
-    text-stroke: 2px rgba(255, 255, 255, 0.3);
     paint-order: stroke fill;
     
     /* MULTIPLE SHADOWS - Tạo độ sâu và nổi bật */
@@ -504,7 +503,6 @@ body {
 .card-title:hover {
     transform: scale(1.12);
     -webkit-text-stroke: 3px rgba(255, 255, 255, 0.5);
-    text-stroke: 3px rgba(255, 255, 255, 0.5);
     filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.8))
             drop-shadow(0 0 30px rgba(255, 27, 107, 1))
             drop-shadow(0 0 60px rgba(69, 202, 252, 0.9))
@@ -1340,6 +1338,7 @@ body {
     background: rgba(167, 139, 250, 0.2);
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .volume-mini::-webkit-slider-thumb {
