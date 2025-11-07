@@ -1178,11 +1178,13 @@ document.addEventListener('DOMContentLoaded', function() {
         audioPlayer.src = path;
         songNameMini.textContent = name;
         
-        // Enable loop
+        // Enable loop and unmute
         audioPlayer.loop = true;
+        audioPlayer.muted = false;
         
-        // Set volume directly
-        audioPlayer.volume = 0.5;
+        // Set volume
+        const targetVolume = 0.7;
+        audioPlayer.volume = 0.1;
         
         // Auto-play immediately
         const playPromise = audioPlayer.play();
@@ -1195,7 +1197,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Fade in volume smoothly
                 let currentVol = 0.1;
-                const targetVolume = 0.7;
                 const fadeInterval = setInterval(() => {
                     if (currentVol < targetVolume) {
                         currentVol += 0.05;
@@ -1205,19 +1206,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }, 100);
             }).catch(error => {
-                // Auto-play was prevented by browser, try on first click
-                console.log('Auto-play prevented, will start on first interaction:', error);
-                
-                const startOnClick = () => {
-                    audioPlayer.play().then(() => {
-                        isPlaying = true;
-                        playBtnMini.textContent = '⏸️';
-                        vinylDisc.style.animationPlayState = 'running';
-                    });
-                    document.removeEventListener('click', startOnClick);
-                };
-                
-                document.addEventListener('click', startOnClick, { once: true });
+                // Auto-play was prevented by browser
+                console.log('Auto-play prevented:', error);
             });
         }
     }
