@@ -47,23 +47,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Parallax effect for orbs based on mouse movement
+    // 🚀 OPTIMIZED: Parallax effect with throttling (reduce lag)
     let mouseX = 0;
     let mouseY = 0;
+    let ticking = false;
     
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX / window.innerWidth;
         mouseY = e.clientY / window.innerHeight;
         
-        const orbs = document.querySelectorAll('.gradient-orb');
-        
-        orbs.forEach((orb, index) => {
-            const speed = (index + 1) * 30;
-            const x = mouseX * speed - speed / 2;
-            const y = mouseY * speed - speed / 2;
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const orbs = document.querySelectorAll('.gradient-orb');
+                
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 20; // Reduced from 30 to 20
+                    const x = mouseX * speed - speed / 2;
+                    const y = mouseY * speed - speed / 2;
+                    
+                    orb.style.transform = `translate(${x}px, ${y}px)`;
+                });
+                
+                ticking = false;
+            });
             
-            orb.style.transform = `translate(${x}px, ${y}px)`;
-        });
+            ticking = true;
+        }
     });
 
     // Smooth scroll reveal
@@ -122,16 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Status dot enhanced pulse
-    const statusDot = document.querySelector('.status-dot');
-    if (statusDot) {
-        setInterval(() => {
-            statusDot.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                statusDot.style.transform = 'scale(1)';
-            }, 300);
-        }, 3000);
-    }
+    // 🚀 OPTIMIZED: Removed status dot pulse interval
+    // Use CSS animation for better performance
 
     // Copy email on click
     const emailCard = document.querySelector('.email');
@@ -198,18 +199,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Enhanced chip animation
-    const chipLines = document.querySelectorAll('.chip-line');
-    setInterval(() => {
-        chipLines.forEach((line, index) => {
-            setTimeout(() => {
-                line.style.opacity = '0.3';
-                setTimeout(() => {
-                    line.style.opacity = '1';
-                }, 100);
-            }, index * 100);
-        });
-    }, 3000);
+    // 🚀 OPTIMIZED: Removed chip animation interval (performance boost)
+    // Chip lines will use CSS animation instead
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
@@ -252,10 +243,9 @@ document.documentElement.style.scrollBehavior = 'smooth';
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('interactiveElements');
     
-    // Kawaii items - teddy bears holding hearts
+    // 🚀 OPTIMIZED: Reduced bears count (10 → 6) for better performance
     const items = [
-        '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️',  // teddy bears with hearts
-        '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️'   // more bears with hearts
+        '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️', '🐻❤️'  // 6 teddy bears with hearts
     ];
     
     const interactiveItems = [];
@@ -860,9 +850,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Function to create confetti effect!
+    // 🚀 OPTIMIZED: Reduced confetti count (20 → 12) for performance
     function createConfetti(x, y) {
-        const confettiCount = 20;
+        const confettiCount = 12; // Reduced from 20
         const confettiShapes = ['💖', '💕', '💗', '⭐', '✨', '🌟', '🌸', '🌺', '🎀'];
         const colors = ['#FF1B6B', '#FF6B9D', '#7DFFEA', '#A78BFA', '#FDA4AF', '#FFC2D1', '#45cafc'];
         
@@ -921,55 +911,61 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Physics simulation - floating and bouncing
+    // 🚀 OPTIMIZED: Physics simulation with reduced calculations
+    let frameCount = 0;
     function animate() {
-        interactiveItems.forEach((item, index) => {
-            if (item.isDragging) return;
-            
-            let x = parseFloat(item.style.left);
-            let y = parseFloat(item.style.top);
-            
-            // Apply velocity
-            x += item.velocity.x;
-            y += item.velocity.y;
-            
-            // Stronger friction to slow down movement
-            item.velocity.x *= 0.98;
-            item.velocity.y *= 0.98;
-            
-            // Bounce off walls with more dampening
-            const margin = 20;
-            if (x <= margin) {
-                item.velocity.x = Math.abs(item.velocity.x) * 0.7;
-                x = margin;
-            } else if (x >= window.innerWidth - 80) {
-                item.velocity.x = -Math.abs(item.velocity.x) * 0.7;
-                x = window.innerWidth - 80;
-            }
-            
-            if (y <= margin) {
-                item.velocity.y = Math.abs(item.velocity.y) * 0.7;
-                y = margin;
-            } else if (y >= window.innerHeight - 80) {
-                item.velocity.y = -Math.abs(item.velocity.y) * 0.7;
-                y = window.innerHeight - 80;
-            }
-            
-            // Very subtle floating effect - different phase for each item
-            const time = Date.now() / 2000;
-            const floatX = Math.sin(time + index * 1.3) * 0.3;
-            const floatY = Math.cos(time + index * 1.7) * 0.3;
-            
-            item.velocity.x += floatX * 0.02;
-            item.velocity.y += floatY * 0.02;
-            
-            // Stop tiny movements to prevent drift
-            if (Math.abs(item.velocity.x) < 0.01) item.velocity.x = 0;
-            if (Math.abs(item.velocity.y) < 0.01) item.velocity.y = 0;
-            
-            item.style.left = x + 'px';
-            item.style.top = y + 'px';
-        });
+        frameCount++;
+        
+        // Update only every 2 frames (30fps instead of 60fps) for better performance
+        if (frameCount % 2 === 0) {
+            interactiveItems.forEach((item, index) => {
+                if (item.isDragging) return;
+                
+                let x = parseFloat(item.style.left);
+                let y = parseFloat(item.style.top);
+                
+                // Apply velocity
+                x += item.velocity.x;
+                y += item.velocity.y;
+                
+                // Stronger friction to slow down movement
+                item.velocity.x *= 0.97; // More friction (was 0.98)
+                item.velocity.y *= 0.97;
+                
+                // Bounce off walls with more dampening
+                const margin = 20;
+                if (x <= margin) {
+                    item.velocity.x = Math.abs(item.velocity.x) * 0.6; // More damping (was 0.7)
+                    x = margin;
+                } else if (x >= window.innerWidth - 80) {
+                    item.velocity.x = -Math.abs(item.velocity.x) * 0.6;
+                    x = window.innerWidth - 80;
+                }
+                
+                if (y <= margin) {
+                    item.velocity.y = Math.abs(item.velocity.y) * 0.6;
+                    y = margin;
+                } else if (y >= window.innerHeight - 80) {
+                    item.velocity.y = -Math.abs(item.velocity.y) * 0.6;
+                    y = window.innerHeight - 80;
+                }
+                
+                // Very subtle floating effect - reduced intensity
+                const time = Date.now() / 3000; // Slower (was 2000)
+                const floatX = Math.sin(time + index * 1.3) * 0.2; // Reduced (was 0.3)
+                const floatY = Math.cos(time + index * 1.7) * 0.2;
+                
+                item.velocity.x += floatX * 0.01; // Reduced (was 0.02)
+                item.velocity.y += floatY * 0.01;
+                
+                // Stop tiny movements earlier to prevent drift
+                if (Math.abs(item.velocity.x) < 0.02) item.velocity.x = 0; // Was 0.01
+                if (Math.abs(item.velocity.y) < 0.02) item.velocity.y = 0;
+                
+                item.style.left = x + 'px';
+                item.style.top = y + 'px';
+            });
+        }
         
         requestAnimationFrame(animate);
     }
@@ -1004,14 +1000,14 @@ document.addEventListener('DOMContentLoaded', function() {
         nameElement.addEventListener('click', function(e) {
             clickCount++;
             
-            // Create massive confetti explosion!
-            for (let i = 0; i < 50; i++) {
+            // 🚀 OPTIMIZED: Reduced confetti burst (50 → 30)
+            for (let i = 0; i < 30; i++) { // Reduced from 50
                 setTimeout(() => {
                     createConfetti(
                         e.clientX + (Math.random() - 0.5) * 100, 
                         e.clientY + (Math.random() - 0.5) * 100
                     );
-                }, i * 20);
+                }, i * 25); // Slightly slower (was 20)
             }
             
             // Special message after 3 clicks
@@ -1028,9 +1024,9 @@ document.addEventListener('DOMContentLoaded', function() {
         profilePhoto.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Create rainbow sparkles
+            // 🚀 OPTIMIZED: Reduced rainbow sparkles (30 → 20)
             const rainbowColors = ['#FF1B6B', '#FF6B9D', '#FFC2D1', '#45cafc', '#7DFFEA', '#A78BFA', '#FDA4AF'];
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 20; i++) { // Reduced from 30
                 setTimeout(() => {
     const sparkle = document.createElement('div');
                     sparkle.style.cssText = `
@@ -1078,9 +1074,10 @@ document.addEventListener('DOMContentLoaded', function() {
         lastClickTime = currentTime;
     });
     
+    // 🚀 OPTIMIZED: Reduced hearts rain (15 → 10)
     function createHeartsRain(x, y) {
         const hearts = ['💖', '💕', '💗', '💓', '💝'];
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 10; i++) { // Reduced from 15
     setTimeout(() => {
                 const heart = document.createElement('div');
                 heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
