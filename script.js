@@ -266,14 +266,16 @@ function createCuteBearModel() {
     return bearGroup;
 }
 
-// Add multiple 3D bears to the scene
+// Add multiple 3D bears to the scene - positioned for visual appeal
 const bears3D = [];
 const bearPositions = [
-    { x: -35, y: 15, z: 10 },
-    { x: 40, y: -10, z: 5 },
-    { x: -30, y: -15, z: 15 },
-    { x: 35, y: 20, z: 8 },
-    { x: 0, y: -25, z: 12 }
+    { x: -38, y: 18, z: 8 },
+    { x: 42, y: -8, z: 6 },
+    { x: -32, y: -18, z: 12 },
+    { x: 38, y: 22, z: 10 },
+    { x: -40, y: -5, z: 15 },
+    { x: 40, y: 12, z: 14 },
+    { x: 0, y: 28, z: 7 }
 ];
 
 bearPositions.forEach((pos, index) => {
