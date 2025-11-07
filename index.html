@@ -1,130 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dan - Bio</title>
+    <title>Nguyễn Ngọc Thủy Tiên - Bio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
-    <!-- Anime-style floating decorations -->
-    <div class="anime-decorations">
-        <div class="anime-element star-1">⭐</div>
-        <div class="anime-element star-2">✨</div>
-        <div class="anime-element heart-1">💖</div>
-        <div class="anime-element heart-2">💕</div>
-        <div class="anime-element cloud-1">☁️</div>
-        <div class="anime-element cloud-2">☁️</div>
-        <div class="anime-element candy-1">🍭</div>
-        <div class="anime-element candy-2">🍬</div>
+    <!-- Animated background -->
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
     </div>
 
-    <!-- Heart decorations -->
-    <div class="hearts">
-        <div class="heart heart-1">💖</div>
-        <div class="heart heart-2">💕</div>
-        <div class="heart heart-3">💗</div>
-        <div class="heart heart-4">✨</div>
-        <div class="heart heart-5">💝</div>
+    <!-- Floating hearts and stars -->
+    <div class="floating-decorations">
+        <div class="decoration heart">💖</div>
+        <div class="decoration heart">💕</div>
+        <div class="decoration heart">💗</div>
+        <div class="decoration star">⭐</div>
+        <div class="decoration star">✨</div>
+        <div class="decoration star">🌟</div>
     </div>
 
-    <div class="content">
-        <div class="bio-card-3d">
-            <div class="card-shine"></div>
+    <!-- Sakura petals -->
+    <div class="sakura-container">
+        <div class="sakura">🌸</div>
+        <div class="sakura">🌸</div>
+        <div class="sakura">🌸</div>
+        <div class="sakura">🌸</div>
+        <div class="sakura">🌸</div>
+        <div class="sakura">🌺</div>
+        <div class="sakura">🌺</div>
+        <div class="sakura">🌺</div>
+    </div>
 
-            <div class="profile-card">
-                <!-- Name Card Layout -->
-                <div class="card-top">
-                    <div class="card-left">
-                        <!-- Profile picture -->
-                        <div class="profile-picture">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Dan" alt="Profile" id="profileImg">
-                        </div>
+    <!-- Interactive teddy bears holding hearts -->
+    <div class="interactive-elements" id="interactiveElements"></div>
 
-                        <!-- Name and title -->
-                        <div class="name-section">
-                            <h1 class="card-name">DAN</h1>
-                            <p class="card-title">Web Developer & Designer</p>
-                        </div>
-                    </div>
+    <!-- Floating Music Disc Player -->
+    <div class="floating-vinyl" id="floatingVinyl">
+        <div class="vinyl-disc-simple">
+            <div class="vinyl-center-simple">
+                <span class="vinyl-icon">♪</span>
+            </div>
+        </div>
+        <div class="vinyl-tooltip" id="vinylTooltip">Click để mở nhạc</div>
+    </div>
 
-                    <!-- Logo/Brand -->
-                    <div class="card-logo">
-                        <div class="logo-box">DAN</div>
-                    </div>
-                </div>
-
-                <!-- Tagline -->
-                <div class="card-tagline">
-                    <p>Creating Immersive Digital Experiences</p>
-                </div>
-
-                <!-- Footer with info -->
-                <div class="card-footer">
-                    <div class="footer-left">
-                        <div class="footer-label">CARD HOLDER</div>
-                        <div class="footer-value">DAN CUONG</div>
-                    </div>
-                    <div class="footer-right">
-                        <div class="footer-label">VALID THRU</div>
-                        <div class="footer-value">∞</div>
-                    </div>
-                </div>
-
-                <!-- Social icons -->
-                <div class="card-social">
-                    <a href="https://github.com/DangHaiCuong" class="social-icon" target="_blank" title="GitHub">
-                        <svg viewBox="0 0 24 24" width="20" height="20">
-                            <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://twitter.com/dancuong" class="social-icon" target="_blank" title="Twitter">
-                        <svg viewBox="0 0 24 24" width="20" height="20">
-                            <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="https://linkedin.com/in/dancuong" class="social-icon" target="_blank" title="LinkedIn">
-                        <svg viewBox="0 0 24 24" width="20" height="20">
-                            <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:dan@example.com" class="social-icon" title="Email">
-                        <svg viewBox="0 0 24 24" width="20" height="20">
-                            <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </a>
-                </div>
+    <!-- Music Player Popup -->
+    <div class="music-popup" id="musicPopup">
+        <div class="music-popup-header">
+            <span>🎵 Music Player</span>
+            <button class="popup-close" id="popupClose">×</button>
+        </div>
+        <div class="music-popup-body">
+            <div class="song-display" id="songDisplay">
+                <div class="song-name-mini" id="songNameMini">Chưa chọn bài hát</div>
+            </div>
+            <div class="mini-controls">
+                <button class="mini-btn" id="playBtnMini">▶️</button>
+                <input type="file" id="audioFile" accept="audio/*" style="display: none;">
+                <label for="audioFile" class="mini-btn file-btn">📁</label>
+                <input type="range" class="volume-mini" id="volumeMini" min="0" max="100" value="70" title="Volume">
             </div>
         </div>
     </div>
 
-    <!-- Pure CSS particles - no Three.js needed -->
-    <div class="particles">
-        <span style="--i:11"></span>
-        <span style="--i:12"></span>
-        <span style="--i:24"></span>
-        <span style="--i:10"></span>
-        <span style="--i:14"></span>
-        <span style="--i:23"></span>
-        <span style="--i:18"></span>
-        <span style="--i:16"></span>
-        <span style="--i:19"></span>
-        <span style="--i:20"></span>
-        <span style="--i:22"></span>
-        <span style="--i:25"></span>
-        <span style="--i:18"></span>
-        <span style="--i:21"></span>
-        <span style="--i:15"></span>
-        <span style="--i:13"></span>
-        <span style="--i:26"></span>
-        <span style="--i:17"></span>
-        <span style="--i:13"></span>
-        <span style="--i:28"></span>
+    <!-- Hidden audio element -->
+    <audio id="audioPlayer" preload="auto" autoplay muted loop></audio>
+
+    <!-- Autoplay Prompt Overlay (shown if autoplay is blocked) -->
+    <div id="autoplayPrompt" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+        <div style="text-align: center; color: white; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); max-width: 400px;">
+            <div style="font-size: 80px; margin-bottom: 20px;">🎵</div>
+            <h2 style="margin: 0 0 15px 0; font-size: 28px;">Nhấn để phát nhạc</h2>
+            <p style="margin: 0 0 25px 0; opacity: 0.9; font-size: 16px;">Trình duyệt yêu cầu bạn nhấn để bắt đầu phát nhạc tự động</p>
+            <button id="startMusicBtn" style="background: white; color: #667eea; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 50px; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                🎧 Bắt đầu
+            </button>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Main container -->
+    <div class="container">
+        <!-- Business Card - Rectangular like a real card -->
+        <div class="namecard-wrapper">
+            <div class="namecard">
+                <!-- Card shine effect -->
+                <div class="card-shine"></div>
+                
+                <!-- Card header -->
+                <div class="card-header">
+                    <div class="card-logo">
+                        <div class="profile-photo">
+                            <img src="images/518329359_722328934018168_8341423685398560496_n.jpg" alt="Thủy Tiên">
+                        </div>
+                    </div>
+                    <div class="corner-text">TIÊN</div>
+                </div>
+
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="info-left">
+                        <h2 class="card-nickname">Thủy Tiên</h2>
+                        <p class="card-title">Nguyễn Ngọc Thủy Tiên</p>
+                        <div class="card-tagline">
+                            <p>✨ Em bé iuu 💕</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card footer -->
+                <div class="card-footer">
+                    <div class="footer-info">
+                        <div class="footer-left">
+                            <div class="footer-label">CARD HOLDER</div>
+                            <div class="footer-value">THỦY TIÊN</div>
+                        </div>
+                        <div class="footer-middle">
+                            <div class="footer-label">VALID THRU</div>
+                            <div class="footer-value">∞</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Icons - Bottom right -->
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/thuytiennbby" class="icon-btn facebook" target="_blank" title="Facebook">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@em.be.iuu07?lang=vi-VN" class="icon-btn tiktok" target="_blank" title="TikTok">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/thuytien" class="icon-btn instagram" target="_blank" title="Instagram">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:thuytien@example.com" class="icon-btn email" title="Email">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with 💖 by Thủy Tiên</p>
+            <p class="footer-year">© 2025 All rights reserved</p>
+        </div>
+    </div>
+
+    <script src="script.js?v=2"></script>
 </body>
 </html>
